@@ -1091,10 +1091,23 @@ footer{border-top:1px solid var(--shadow);padding:44px 0;}
   20%{transform:rotate(0);}
 }
 @media(max-width:640px){
-  .callback-fab{bottom:20px;left:20px;padding:14px;}
+  .callback-fab{
+    bottom:20px;
+    right:20px;
+    left:auto;          /* ← сбрасываем правую привязку, иначе кнопка растягивается */
+    width:56px;
+    height:56px;
+    padding:0;
+    justify-content:center;
+    gap:0;
+  }
   .callback-fab-text{display:none;}
+  .callback-fab-icon{
+    width:auto;height:auto;
+    background:none;
+    font-size:22px;
+  }
 }
-
 /* ===== Modal overlay (callback + exit-intent) ===== */
 .modal-overlay{
   position:fixed;inset:0;z-index:400;
