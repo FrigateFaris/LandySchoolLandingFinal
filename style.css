@@ -1283,3 +1283,42 @@ footer{border-top:1px solid var(--shadow);padding:44px 0;}
 .in-view .btn-shine::after{
   animation-play-state:running;
 }
+
+/* ===== Fix: горизонтальное переполнение на мобильных ===== */
+@media (max-width: 640px) {
+  /* Кнопки: разрешаем перенос текста и не даём вылезать за экран */
+  .btn{
+    white-space:normal;
+    text-align:center;
+    max-width:100%;
+    padding:15px 22px;
+    font-size:14px;
+    line-height:1.35;
+  }
+  .calc-cta{
+    display:flex;
+    width:100%;
+    justify-content:center;
+  }
+
+  /* Размерные линии: подпись переносится, засечки не ломают верстку */
+  .dim-line{
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width:100%;
+  }
+  .dim-label{
+    white-space:normal;
+    text-align:center;
+    padding:0 10px;
+    font-size:10.5px;
+    line-height:1.5;
+    flex:1 1 100%;
+    order:2;
+  }
+  .dim-seg{min-width:24px;}
+  .method-foot-dim{margin-top:44px;}
+}
+
+/* Страховка от любого горизонтального скролла */
+html, body{overflow-x:hidden;max-width:100%;}
