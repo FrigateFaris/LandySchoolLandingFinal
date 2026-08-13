@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landy School — Здесь профессию дизайнера не изучают, здесь её проживают</title>
+<meta name="description" content="Landy School — школа дизайна интерьера в Ташкенте. Практика на реальных объектах с первого дня, личное наставничество, готовый проект в портфолио.">
+<meta property="og:title" content="Landy School — школа дизайна интерьера">
+<meta property="og:description" content="Здесь профессию дизайнера не изучают — здесь её проживают.">
+<meta property="og:image" content="images/og-cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="preloader" id="preloader">
+  <svg width="64" height="64" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="28" fill="none" stroke="var(--object)" stroke-width="1"/>
+    <circle cx="32" cy="32" r="28" fill="none" stroke="var(--accent)" stroke-width="1.5" class="preloader-ring"/>
+  </svg>
+  <span>LANDY · SCHOOL</span>
+</div>
+<div class="progress-bar" id="progressBar"></div>
+<div class="spotlight" id="spotlight"></div>
+
+<button class="to-top" id="toTop" aria-label="Наверх">
+  <svg viewBox="0 0 44 44">
+    <circle class="ring-bg" cx="22" cy="22" r="19"></circle>
+    <circle class="ring-fill" id="ringFill" cx="22" cy="22" r="19"></circle>
+  </svg>
+  <span>↑</span>
+</button>
+
+<!-- Floating callback button -->
+<button class="callback-fab" id="callbackFab">
+  <span class="callback-fab-icon">📞</span>
+  <span class="callback-fab-text">Обратный звонок</span>
+</button>
+
+<!-- Callback modal -->
+<div class="modal-overlay" id="callbackModal">
+  <div class="modal-box">
+    <button class="modal-close" id="callbackClose" aria-label="Закрыть">×</button>
+    <span class="eyebrow">Обратный звонок</span>
+    <h3>Перезвоним в течение 15 минут</h3>
+    <p class="modal-sub">Оставьте номер — и закрепите скидку на обучение.</p>
+    <form id="callbackForm">
+      <div class="form-success" id="callbackSuccess">
+        <svg viewBox="0 0 60 60" width="44" height="44">
+          <circle cx="30" cy="30" r="27" fill="none" stroke="var(--accent)" stroke-width="2" class="success-circle"/>
+          <path d="M18 31 L26 39 L42 21" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="success-check"/>
+        </svg>
+        <p>Заявка принята!</p>
+        <span>Перезвоним в ближайшее время</span>
+      </div>
+      <div class="form-row">
+        <label for="cbName">Имя</label>
+        <input type="text" id="cbName" placeholder="Как к вам обращаться" required>
+      </div>
+      <div class="form-row">
+        <label for="cbPhone">Телефон</label>
+        <input type="text" id="cbPhone" placeholder="+998 __ ___ __ __" required>
+      </div>
+      <button type="submit" class="btn btn-shine">Жду звонка</button>
+    </form>
+  </div>
+</div>
+
+<!-- Exit-intent popup -->
+<div class="modal-overlay" id="exitModal">
+  <div class="modal-box">
+    <button class="modal-close" id="exitClose" aria-label="Закрыть">×</button>
+    <span class="eyebrow">Подождите</span>
+    <h3>Специальное предложение для вас</h3>
+    <p class="modal-sub">Оставьте контакт сейчас — и мы закрепим скидку на любой формат обучения.</p>
+    <form id="exitForm">
+      <div class="form-success" id="exitSuccess">
+        <svg viewBox="0 0 60 60" width="44" height="44">
+          <circle cx="30" cy="30" r="27" fill="none" stroke="var(--accent)" stroke-width="2" class="success-circle"/>
+          <path d="M18 31 L26 39 L42 21" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="success-check"/>
+        </svg>
+        <p>Скидка закреплена!</p>
+        <span>Мы свяжемся с вами в течение дня</span>
+      </div>
+      <div class="form-row">
+        <label for="exName">Имя</label>
+        <input type="text" id="exName" placeholder="Как к вам обращаться" required>
+      </div>
+      <div class="form-row">
+        <label for="exPhone">Телефон / Telegram</label>
+        <input type="text" id="exPhone" placeholder="+998 __ ___ __ __ или @username" required>
+      </div>
+      <button type="submit" class="btn btn-shine">Закрепить скидку</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header id="siteHeader">
+  <div class="announce" id="announce">
+    <div class="wrap announce-inner">
+      <span>🎁 Запишитесь на бесплатную встречу на этой неделе — закрепите скидку на любой формат обучения</span>
+      <a href="#cta" class="announce-cta">Записаться →</a>
+      <button class="announce-close" id="announceClose" aria-label="Закрыть">×</button>
+    </div>
+  </div>
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="logo">LANDY<span>·</span>SCHOOL</a>
+      <div class="nav-links">
+        <a href="#profession">Профессия</a>
+        <a href="#calculator">Доход</a>
+        <a href="#gallery">Портфолио</a>
+        <a href="#method">Программа</a>
+        <a href="#pricing">Форматы</a>
+        <a href="#faq">Вопросы</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#cta" class="btn">Оставить заявку</a>
+        <div class="burger"><span></span><span></span><span></span></div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <svg class="arc-svg" width="520" height="520" viewBox="0 0 520 520" style="top:-60px;right:-120px;">
+    <path class="arc-path" id="arc1" d="M20,500 C180,500 420,380 500,20"/>
+  </svg>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow hero-in hero-in-1">Школа дизайна интерьера · Ташкент</span>
+      <h1 class="hero-in hero-in-2">Здесь профессию дизайнера не изучают — здесь её <span class="accent">проживают</span></h1>
+      <p class="hero-in hero-in-3">Реальные объекты. Реальные клиенты. Реальный результат в портфолио — с первых недель обучения, а не после диплома.</p>
+      <div class="hero-cta-row hero-in hero-in-4">
+        <a href="#cta" class="btn btn-shine">Оставить заявку на встречу</a>
+      </div>
+    </div>
+      <div class="hero-visual hero-in hero-in-5" id="heroVisual">
+        <div class="hero-media" id="heroMedia">
+          <!-- Постер: показывается мгновенно, пока видео (если будет разрешено) догружается -->
+          <img src="images/hero-bg.svg" alt="Реализованный проект Landy Design" loading="eager" id="heroImg">
+          <!-- TODO: положите файл images/hero-video.mp4 (10–15 сек, 1080p, h.264, без звука, 2–5 МБ)
+              Видео подключится автоматически: на десктопе — с плавным проявлением поверх постера,
+              на мобильных и при экономии трафика (Data Saver) — не загрузится вовсе, останется постер. -->
+          <video class="hero-video" id="heroVideo" muted loop playsinline preload="none" poster="images/hero-bg.svg" aria-hidden="true">
+            <source data-src="images/hero-video.mp4" type="video/mp4">
+          </video>
+        </div>
+        <span class="corner tl light"></span><span class="corner tr light"></span>
+        <span class="corner bl light"></span><span class="corner br light"></span>
+        <span class="hv-label"></span>  
+      </div>
+  </div>
+  <div class="scroll-cue"><span>Листайте</span><div class="line"></div></div>
+</section>
+
+<!-- ============ TICKER ============ -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Практика с первого дня</span><span class="ticker-dot">✦</span>
+    <span>Мини-группы 6-8 человек</span><span class="ticker-dot">✦</span>
+    <span>10 лет практики наставников</span><span class="ticker-dot">✦</span>
+    <span>Реальные объекты, не картинки</span><span class="ticker-dot">✦</span>
+    <span>Готовый проект в портфолио</span><span class="ticker-dot">✦</span>
+    <span>Практика с первого дня</span><span class="ticker-dot">✦</span>
+    <span>Мини-группы 6-8 человек</span><span class="ticker-dot">✦</span>
+    <span>10 лет практики наставников</span><span class="ticker-dot">✦</span>
+    <span>Реальные объекты, не картинки</span><span class="ticker-dot">✦</span>
+    <span>Готовый проект в портфолио</span><span class="ticker-dot">✦</span>
+  </div>
+</div>
+
+<!-- ============ STATS ============ -->
+<section class="section-tight stats" id="stats">
+  <div class="wrap stats-grid">
+    <div class="stat reveal">
+      <div class="stat-num" data-count="10" data-suffix="+">0</div>
+      <div class="stat-label">лет практики наставников</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num" data-count="72">0</div>
+      <div class="stat-label">академических часа</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num" data-count="8" data-prefix="6–">0</div>
+      <div class="stat-label">человек в мини-группе</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num" data-count="100" data-suffix="%">0</div>
+      <div class="stat-label">практика на реальных объектах</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROFESSION EXPLAINER ============ -->
+<section class="section profession" id="profession">
+  <div class="wrap">
+    <div class="profession-grid">
+      <div class="profession-head reveal">
+        <span class="eyebrow">Кто такой дизайнер интерьера</span>
+        <h2>Профессия, которая меняет не только пространство — но и вашу жизнь</h2>
+        <p class="profession-lead">Дизайнер интерьера — это не просто человек с хорошим вкусом. Это специалист, который берёт пустое или неудобное пространство и превращает его в место, где людям хочется жить. За красивой картинкой стоит целый набор навыков: от планирования и инженерии до переговоров с клиентом и управления бюджетом стройки.</p>
+      </div>
+      <div class="profession-visual reveal">
+        <div class="profession-media">
+          <img src="images/profession-hero.svg" alt="" loading="lazy">
+          <video class="profession-video" muted loop playsinline preload="none" poster="images/profession-hero.svg" aria-hidden="true">
+            <source data-src="images/designer-process.mp4" type="video/mp4">
+          </video>
+        </div>  
+        <span class="corner tl light"></span><span class="corner tr light"></span>
+        <span class="corner bl light"></span><span class="corner br light"></span>
+      </div>
+    </div>
+
+    <div class="task-grid reveal">
+      <div class="task-card">
+        <div class="task-photo"><img src="images/task-planning.jpg" alt="Планирование пространства" loading="lazy"></div>
+        <h4>Планирование пространства</h4>
+        <p>Зонирование, эргономика, логика движения человека по квартире.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-photo"><img src="images/task-drawings.jpg" alt="Чертежи и замеры" loading="lazy"></div>
+        <h4>Чертежи и замеры</h4>
+        <p>Точные расчёты, техническая документация для строителей.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-photo"><img src="images/task-materials.jpg" alt="Подбор материалов" loading="lazy"></div>
+        <h4>Подбор материалов</h4>
+        <p>От напольных покрытий и плитки до текстиля и освещения.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-photo"><img src="images/task-engineering.jpg" alt="Инженерные решения" loading="lazy"></div>
+        <h4>Инженерные решения</h4>
+        <p>Свет, электрика, вентиляция — то, что не видно, но определяет комфорт.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-photo"><img src="images/task-client.jpg" alt="Работа с клиентом" loading="lazy"></div>
+        <h4>Работа с клиентом</h4>
+        <p>Выявление потребностей, презентация решений, защита бюджета.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-photo"><img src="images/task-supervision.jpg" alt="Авторский надзор" loading="lazy"></div>
+        <h4>Авторский надзор</h4>
+        <p>Координация со строителями и контроль качества на объекте.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INCOME CALCULATOR ============ -->
+<section class="section calculator" id="calculator">
+  <div class="wrap">
+    <div class="calc-head reveal">
+      <span class="eyebrow">Ваш потенциальный доход</span>
+      <h2>Сколько может зарабатывать дизайнер интерьера</h2>
+      <p>Дизайнеры интерьера обычно берут гонорар за проект — из расчёта на квадратный метр площади. Введите площадь квартиры и посмотрите, сколько можно заработать на одном проекте.</p>
+    </div>
+
+    <div class="calc-box reveal">
+      <div class="calc-input-row">
+        <label for="calcArea">Площадь квартиры, м²</label>
+        <div class="calc-input-wrap">
+          <input type="range" id="calcAreaRange" min="30" max="300" value="75" step="5">
+          <input type="number" id="calcArea" min="10" max="1000" value="75">
+        </div>
+      </div>
+
+      <div class="calc-results">
+        <div class="calc-card">
+          <span class="calc-tag">Начинающий</span>
+          <div class="calc-rate">$10 / м²</div>
+          <div class="calc-amount" id="calcNovice">$750</div>
+          <p>Первые проекты, наработка портфолио</p>
+        </div>
+        <div class="calc-card calc-card-hi">
+          <span class="calc-tag">Средний уровень</span>
+          <div class="calc-rate">$15–20 / м²</div>
+          <div class="calc-amount" id="calcMid">$1 125–$1 500</div>
+          <p>Стабильный поток клиентов, уверенное портфолио</p>
+        </div>
+        <div class="calc-card">
+          <span class="calc-tag">Профи</span>
+          <div class="calc-rate">от $35 / м²</div>
+          <div class="calc-amount" id="calcPro">от $2 625</div>
+          <p>Личный бренд, премиальные заказчики</p>
+        </div>
+      </div>
+
+      <p class="calc-note">*Это гонорар за один проект дизайна интерьера, без учёта расходов. Дизайнеры обычно ведут несколько проектов в год — доход масштабируется вместе с опытом и портфолио.</p>
+
+      <div class="calc-cta">
+        <a href="#cta" class="btn btn-shine">Хочу зарабатывать так же — записаться на консультацию</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ GALLERY / PORTFOLIO ============ -->
+<section class="section gallery" id="gallery">
+  <div class="wrap">
+    <div class="gallery-head reveal" >
+      <span class="eyebrow">Наша студия</span>
+      <h2>Объекты Landy Design</h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <!-- TODO: замените на реальные фото объектов студии -->
+      <div class="gallery-item" data-caption="Объект Landy Design"><img src="images/LandyDesign/studio-project-01.jpg" alt="Объект Landy Design" loading="lazy"><span class="gallery-caption"></span></div>
+      <div class="gallery-item" data-caption="Объект Landy Design"><img src="images/LandyDesign/studio-project-03.jpg" alt="Объект Landy Design" loading="lazy"><span class="gallery-caption"></span></div>
+      <div class="gallery-item" data-caption="Спальня · Ташкент"><img src="images/LandyDesign/studio-project-02.jpg" alt="Проект интерьера — спальня" loading="lazy"><span class="gallery-caption"></span></div>
+      <div class="gallery-item" data-caption="Кухня · Ташкент"><img src="images/LandyDesign/studio-project-04.jpg" alt="Проект интерьера — кухня" loading="lazy"><span class="gallery-caption"></span></div>    </div>
+    <div class="gallery-grid reveal"style="margin-top:15px;">
+      <!-- TODO: заменить все фото ниже на реальные проекты студии/выпускников -->
+      <div class="gallery-item bento-big" data-caption="Гостиная · Ташкент"><img src="images/LandyDesign/project-01.jpg" alt="Проект интерьера — гостиная" loading="lazy"><span class="gallery-caption"></span></div>
+      <div class="gallery-item bento-tall" data-caption="Санузел · Ташкент"><img src="images/LandyDesign/project-04.jpg" alt="Проект интерьера — санузел" loading="lazy"><span class="gallery-caption"></span></div>
+      <div class="gallery-item" data-caption="Детская · Ташкент"><img src="images/LandyDesign/project-05.jpg" alt="Проект интерьера — детская" loading="lazy"><span class="gallery-caption"></span></div>
+      <div class="gallery-item" data-caption="Кабинет · Ташкент"><img src="images/LandyDesign/project-06.jpg" alt="Проект интерьера — кабинет" loading="lazy"><span class="gallery-caption"></span></div>
+      <div class="gallery-item bento-big" data-caption="Прихожая · Ташкент"><img src="images/LandyDesign/project-07.jpg" alt="Проект интерьера — прихожая" loading="lazy"><span class="gallery-caption"></span></div>
+      <div class="gallery-item" data-caption="Терраса · Ташкент"><img src="images/LandyDesign/project-08.jpg" alt="Проект интерьера — терраса" loading="lazy"><span class="gallery-caption"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MANIFESTO ============ -->
+<section class="section manifesto" id="manifesto">
+  <div class="wrap manifesto-grid">
+
+    <div class="blueprint-panel reveal">
+      <div class="corner-frame">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+        <svg class="sketch-svg" viewBox="0 0 200 200" fill="none">
+          <path d="M20 180 L20 20 L180 20" stroke="var(--accent)" stroke-width="1.2"/>
+          <path d="M20 180 Q20 120 80 120" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="58" y1="20" x2="102" y2="20" stroke="var(--accent)" stroke-width="3"/>
+          <circle cx="20" cy="180" r="2.2" fill="var(--accent)"/>
+          <line x1="20" y1="192" x2="180" y2="192" stroke="var(--detail)" stroke-width="1" stroke-dasharray="2 4"/>
+          <line x1="20" y1="187" x2="20" y2="197" stroke="var(--detail)" stroke-width="1"/>
+          <line x1="180" y1="187" x2="180" y2="197" stroke="var(--detail)" stroke-width="1"/>
+        </svg>
+        <span class="scale-label">М 1:50 · план-эскиз</span>
+        <div class="pinned-photo">
+          <!-- TODO: заменить на реальное фото объекта Landy Design -->
+          <img src="images/manifesto-pinned.jpg" alt="Фрагмент реализованного проекта" loading="lazy">
+        </div>
+      </div>
+      <div class="swatch-row">
+        <span class="swatch swatch-wood" title="Дерево"></span>
+        <span class="swatch swatch-fabric" title="Текстиль"></span>
+        <span class="swatch swatch-stone" title="Камень"></span>
+      </div>
+    </div>
+
+    <div class="manifesto-text reveal">
+      <span class="eyebrow">Философия школы</span>
+      <blockquote>
+        <p class="lead">Дизайн интерьера невозможно освоить по учебнику. Его нельзя выучить, глядя в презентацию или кликая по кнопкам программы.</p>
+        <p>Его можно только <span class="accent">прожить</span> — начиная с пространства, с человека, который в нём будет жить, с реальной стройки, реальной сметы и реального клиента, который сидит напротив вас и ждёт решения.</p>
+        <p>Мы не готовим специалистов по кнопкам в 3Ds MAX. Мы формируем <span class="accent">дизайнерское мышление</span> — а софт добавляется в конце, когда голова уже умеет думать пространством.</p>
+      </blockquote>
+      <div class="dim-line">
+        <span class="dim-cap"></span><span class="dim-seg"></span>
+        <span class="dim-label">72 часа · 3 месяца · 1 мышление</span>
+        <span class="dim-seg"></span><span class="dim-cap"></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ PAINS ============ -->
+<section class="section" id="pains">
+  <div class="wrap pains-grid">
+    <div class="pains-sticky reveal">
+      <span class="eyebrow">Знакомо?</span>
+      <h2>Большинство наших студентов приходят не с нуля</h2>
+      <p>А после курсов, которые дали диплом, но не дали профессию.</p>
+    </div>
+    <div>
+      <div class="pain-cards">
+        <div class="pain-card reveal">
+          <div class="pain-icon">✎</div>
+          <h4>«Я прошла курс, но так и не взяла ни одного проекта»</h4>
+          <p>Диплом есть, уверенности — нет. Первый реальный клиент пугает больше, чем сама профессия.</p>
+        </div>
+        <div class="pain-card reveal">
+          <div class="pain-icon">▦</div>
+          <h4>«Не понимаю, как разговаривать со строителями»</h4>
+          <p>Программу знаю, а что делать на объекте, когда прораб задаёт вопрос — не знаю.</p>
+        </div>
+        <div class="pain-card reveal">
+          <div class="pain-icon">◐</div>
+          <h4>«Боюсь, что испорчу ремонт заказчику»</h4>
+          <p>Страх ответственности за чужие деньги и чужое пространство — то, о чём молчат на большинстве курсов.</p>
+        </div>
+        <div class="pain-card reveal">
+          <div class="pain-icon">◆</div>
+          <h4>«Не умею продавать свои услуги»</h4>
+          <p>Красивое портфолио есть, а как превратить его в первых платящих клиентов — не понятно.</p>
+        </div>
+      </div>
+      <p class="pains-close reveal">Landy School существует именно для того, чтобы закрыть эти пробелы — не в теории, а на практике.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METHODOLOGY ============ -->
+<section class="section method" id="method">
+  <div class="wrap">
+    <div class="method-head reveal">
+      <span class="eyebrow">Как устроено обучение</span>
+      <h2>Сначала мышление. Потом мышка.</h2>
+    </div>
+    <div class="timeline" id="timeline">
+      <div class="timeline-progress"><div class="timeline-progress-fill" id="timelineFill"></div></div>
+      <div class="t-step reveal">
+        <div class="t-photo">
+          <!-- TODO: заменить на реальное фото со студенческого занятия -->
+          <img src="images/step-1-sketch.jpg" alt="Скетчинг и коллажирование" loading="lazy">
+        </div>
+        <div class="t-num">01</div>
+        <span class="t-sub">1-й месяц</span>
+        <h3>Мышление и пространство</h3>
+        <p>Работаем руками: скетчи, коллажи, анализ пространства и потребностей человека — без единой программы на экране. Формируем насмотренность, эргономику, чувство пропорций.</p>
+      </div>
+      <div class="t-step reveal">
+        <div class="t-photo">
+          <!-- TODO: заменить на реальное фото из шоурума / с объекта -->
+          <img src="images/step-2-materials.jpg" alt="Работа с материалами в шоуруме" loading="lazy">
+        </div>
+        <div class="t-num">02</div>
+        <span class="t-sub">2-й месяц</span>
+        <h3>Клиент, зонирование, инженерия</h3>
+        <p>Симулируем брифинг с реальным клиентом. Разбираем зонирование, свет, электрику, вентиляцию. Выезды на объекты и работа в шоурумах с материалами вживую.</p>
+      </div>
+      <div class="t-step reveal">
+        <div class="t-photo">
+          <!-- TODO: заменить на реальный скриншот проекта в Rem Planner/Homestyler -->
+          <img src="images/step-3-software.jpg" alt="Работа в программах. Не 3Ds Max!" loading="lazy">
+        </div>
+        <div class="t-num">03</div>
+        <span class="t-sub">3-й месяц</span>
+        <h3>Софт и защита проекта</h3>
+        <p>Переносим готовое решение в программах. Собираем и защищаем полноценный проект для портфолио — как перед настоящим заказчиком.</p>
+      </div>
+    </div>
+    <div class="dim-line method-foot-dim">
+      <span class="dim-cap"></span><span class="dim-seg"></span>
+      <span class="dim-label">72 ак. часа · 3 занятия в неделю по 2 часа · группы 6-8 человек</span>
+      <span class="dim-seg"></span><span class="dim-cap"></span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ DIFFERENTIATION ============ -->
+<section class="section" id="diff">
+  <div class="wrap">
+    <div class="compare-head reveal">
+      <span class="eyebrow">Отличия</span>
+      <h2>Не очередная школа «по кнопкам»</h2>
+    </div>
+    <div class="compare reveal">
+      <div class="compare-col muted">
+        <div class="compare-title">Типичные курсы</div>
+        <div class="compare-row"><span class="mark">–</span>Практика — в конце, как бонус</div>
+        <div class="compare-row"><span class="mark">–</span>Учат нажимать кнопки в программе</div>
+        <div class="compare-row"><span class="mark">–</span>Общая группа на 20+ человек</div>
+        <div class="compare-row"><span class="mark">–</span>Куратор без опыта реальных объектов</div>
+        <div class="compare-row"><span class="mark">–</span>После курса — только сертификат</div>
+      </div>
+      <div class="compare-col hi">
+        <div class="compare-title">Landy School</div>
+        <div class="compare-row"><span class="mark">＋</span>Практика — с первого дня</div>
+        <div class="compare-row"><span class="mark">＋</span>Сначала учат думать пространством</div>
+        <div class="compare-row"><span class="mark">＋</span>Мини-группы 6-8 человек</div>
+        <div class="compare-row"><span class="mark">＋</span>Наставники — практикующие дизайнеры с 10-летним опытом</div>
+        <div class="compare-row"><span class="mark">＋</span>После курса — готовый проект в портфолио и место в комьюнити дизайнеров</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENTORS ============ -->
+<section class="section" id="mentors">
+  <div class="wrap">
+    <div class="compare-head reveal">
+      <span class="eyebrow">Наставники</span>
+      <h2>Люди, которые ведут вас лично</h2>
+    </div>
+    <div class="mentors-grid reveal">
+      <div class="mentor">
+        <!-- Реального фото пока нет — оставлена графичная заглушка, чтобы не выдавать чужое стоковое лицо за Нигину -->
+        <div class="mentor-photo mentor-photo-placeholder">
+          <img src="images/IMG_3730.PNG" alt="">
+          <span class="mentor-photo-tag">Основательница · Landy Design</span>
+        </div>
+        <div class="mentor-info">
+          <h3>Нигина</h3>
+          <span class="mentor-role">Основательница и директор Landy School</span>
+          <p>Практикующий дизайнер интерьера с 10-летним опытом. Ведёт собственную студию Landy Design и лично сопровождает каждую группу — от первого брифинга до защиты проекта. Её объекты становятся учебными кейсами для студентов.</p>
+        </div>
+      </div>
+      <div class="mentor">
+        <div class="mentor-photo mentor-photo-placeholder">
+          <img src="images/photo_2026-08-06_00-37-10.jpg" alt="">
+          <span class="mentor-photo-tag">Академическая база</span>
+        </div>
+        <div class="mentor-info">
+          <h3>Мохинур</h3>
+          <span class="mentor-role">Академическая база</span>
+          <p>Отвечает за системность программы: от эргономики и колористики до инженерных основ. Помогает превратить творческое видение в грамотное, реализуемое решение.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ============ REAL RESULTS ============ -->
+<section class="section gallery" id="results">
+  <div class="wrap">
+    <div class="gallery-head reveal">
+      <span class="eyebrow">Результаты</span>
+      <h2>Одни из результатов наших учеников</h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <!-- TODO: замените на реальные фото проектов выпускников -->
+      <div class="gallery-item bento-big" data-caption="Проект выпускника"><img src="images/student-result-01.jpg" alt="Проект выпускника" loading="lazy"><span class="gallery-caption"></span></div>
+      <div class="gallery-item" data-caption="Проект выпускника"><img src="images/student-result-02.jpg" alt="Проект выпускника" loading="lazy"><span class="gallery-caption"></span></div>
+      <div class="gallery-item" data-caption="Проект выпускника"><img src="images/student-result-03.jpg" alt="Проект выпускника" loading="lazy"><span class="gallery-caption"></span></div>
+      <div class="gallery-item bento-tall" data-caption="Проект выпускника">
+        <div class="gallery-video-wrap">
+          <img src="images/student-result-04.jpg" alt="Проект выпускника" loading="lazy">
+          <video class="gallery-video" muted loop playsinline preload="none" poster="images/student-result-04.jpg" aria-hidden="true">
+            <source data-src="images/student-project-video.mp4" type="video/mp4">
+          </video>
+        </div>
+        <span class="gallery-caption"></span>
+      </div>    
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ OUTCOMES ============ -->
+<section class="section outcomes" id="outcomes">
+  <div class="wrap">
+    <div class="outcomes-head reveal">
+      <span class="eyebrow">Результат</span>
+      <h2>После Landy School у вас будет</h2>
+    </div>
+    <div class="outcomes-grid">
+      <div class="outcome reveal">
+        <div class="o-icon">01</div>
+        <h4>Готовый проект в портфолио</h4>
+        <p>Полноценный интерьерный проект от брифинга до презентации клиенту.</p>
+      </div>
+      <div class="outcome reveal">
+        <div class="o-icon">02</div>
+        <h4>Навык ведения проекта целиком</h4>
+        <p>От первой встречи с заказчиком до сдачи объекта.</p>
+      </div>
+      <div class="outcome reveal">
+        <div class="o-icon">03</div>
+        <h4>Первые клиенты и поддержка</h4>
+        <p>Доступ к комьюнити и практике на объектах Landy Design.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ECOSYSTEM ============ -->
+<section class="section eco" id="eco">
+  <div class="wrap">
+    <div class="eco-head reveal">
+      <span class="eyebrow">Видение</span>
+      <h2>Вы становитесь частью экосистемы, а не просто выпускником курса</h2>
+      <p>Landy School выросла из действующей дизайн-студии — и продолжает расти вместе с ней. Единая экосистема Landy Group, в которую входят наши выпускники.</p>
+    </div>
+    <div class="eco-diagram reveal" id="ecoDiagram">
+      <div class="eco-node" style="--pulse-delay:0s">Студия декорирования</div>
+      <div class="eco-link"><span class="eco-link-fill"></span></div>
+      <div class="eco-node" style="--pulse-delay:.6s">Студия дизайна интерьера</div>
+      <div class="eco-link"><span class="eco-link-fill" style="animation-delay:.6s"></span></div>
+      <div class="eco-node" style="--pulse-delay:1.2s">Образовательный центр</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="section" id="pricing">
+  <svg class="arc-svg" width="420" height="420" viewBox="0 0 420 420" style="top:0;right:-140px;">
+    <path class="arc-path" id="arc2" d="M10,10 C160,20 380,140 400,400"/>
+  </svg>
+  <div class="wrap">
+    <div class="pricing-head reveal">
+      <span class="eyebrow">Форматы обучения</span>
+      <h2>Выберите формат, который подходит именно вам</h2>
+    </div>
+    <div class="pricing-grid reveal">
+      <div class="plan plan-premium tilt-card">
+        <span class="plan-tag">Рекомендуем</span>
+        <h3>Offline · Premium</h3>
+        <ul class="plan-list">
+          <li><span class="dot"></span>Выезды на реальные объекты</li>
+          <li><span class="dot"></span>Работа в шоурумах и на объектах</li>
+          <li><span class="dot"></span>Личное наставничество студии</li>
+        </ul>
+        <div class="plan-divider"></div>
+        <div class="price-label">Ежемесячно</div>
+        <div class="price-monthly">6 500 000 сум <small>/ мес*</small></div>
+        <div class="price-total-note">3 мес = 19 500 000 сум</div>
+        <div class="discount-badge">При полной оплате −10%</div>
+        <div class="price-final">17 550 000 сум за курс</div>
+        <a href="#cta" class="btn">Выбрать Offline · Premium</a>
+      </div>
+      <div class="plan plan-base tilt-card">
+        <h3>Hybrid · Base</h3>
+        <ul class="plan-list">
+          <li><span class="dot"></span>Живые онлайн-конференции</li>
+          <li><span class="dot"></span>Работа в шоурумах и на объектах</li>
+          <li><span class="dot"></span>Удалённая проверка</li>
+        </ul>
+        <div class="plan-divider"></div>
+        <div class="price-label">Ежемесячно</div>
+        <div class="price-monthly">4 800 000 сум <small>/ мес*</small></div>
+        <div class="price-total-note">3 мес = 14 400 000 сум</div>
+        <div class="discount-badge">При полной оплате −10%</div>
+        <div class="price-final">12 960 000 сум за курс</div>
+        <a href="#cta" class="btn btn-ghost btn-ghost-light">Выбрать Hybrid · Base</a>
+      </div>
+    </div>
+    <p class="pricing-foot">*Точные условия и возможности рассрочки обсуждаются индивидуально.</p>
+    <div class="pricing-cta-row">
+      <a href="#cta" class="btn btn-ghost">Узнать точную стоимость</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ VIDEO TESTIMONIALS ============ -->
+<section class="section testi" id="testi">
+  <div class="wrap">
+    <div class="testi-head reveal">
+      <span class="eyebrow">Отзывы</span>
+      <h2>Нам не нужно рассказывать — послушайте наших выпускников</h2>
+    </div>
+    <div class="testi-track reveal">
+      <!-- TODO: замените data-youtube-id на реальный ID видео из YouTube-ссылки
+           (например, для https://youtube.com/shorts/AbCdEfGhIjK id = AbCdEfGhIjK) -->
+      <div class="testi-video-card" data-youtube-id="Fp-Vvygs4Dg">
+        <div class="testi-video-thumb">
+          <img src="https://www.youtube.com/shorts/Fp-Vvygs4Dg" alt="Отзыв выпускника" loading="lazy">
+          <button class="testi-play" aria-label="Смотреть отзыв">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+          </button>
+        </div>
+        <div class="testi-name">Выпуск · 2025</div>
+      </div>
+      <div class="testi-video-card" data-youtube-id="VIDEO_ID_2">
+        <div class="testi-video-thumb">
+          <img src="https://img.youtube.com/vi/VIDEO_ID_2/hqdefault.jpg" alt="Отзыв выпускника" loading="lazy">
+          <button class="testi-play" aria-label="Смотреть отзыв">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+          </button>
+        </div>
+        <div class="testi-name">Выпуск · 2025</div>
+      </div>
+      <div class="testi-video-card" data-youtube-id="VIDEO_ID_3">
+        <div class="testi-video-thumb">
+          <img src="https://img.youtube.com/vi/VIDEO_ID_3/hqdefault.jpg" alt="Отзыв выпускника" loading="lazy">
+          <button class="testi-play" aria-label="Смотреть отзыв">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+          </button>
+        </div>
+        <div class="testi-name">Выпуск · 2026</div>
+      </div>
+      <div class="testi-video-card" data-youtube-id="VIDEO_ID_4">
+        <div class="testi-video-thumb">
+          <img src="https://img.youtube.com/vi/VIDEO_ID_4/hqdefault.jpg" alt="Отзыв выпускника" loading="lazy">
+          <button class="testi-play" aria-label="Смотреть отзыв">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+          </button>
+        </div>
+        <div class="testi-name">Выпуск · 2026</div>
+      </div>
+       <div class="testi-video-card" data-youtube-id="VIDEO_ID_4">
+        <div class="testi-video-thumb">
+          <img src="https://img.youtube.com/vi/VIDEO_ID_4/hqdefault.jpg" alt="Отзыв выпускника" loading="lazy">
+          <button class="testi-play" aria-label="Смотреть отзыв">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+          </button>
+        </div>
+        <div class="testi-name">Выпуск · 2026</div>
+      </div>
+    </div>
+  </div>
+
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="faq-head reveal">
+      <span class="eyebrow">Вопросы</span>
+      <h2>Отвечаем на то, что обычно спрашивают до записи</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item open">
+        <button class="faq-q"><span class="faq-idx">01</span><span>«Я не творческий человек, у меня получится?»</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Дизайн — это в первую очередь система и мышление, а не врождённый талант. Мы учим видеть пространство и принимать решения структурно — насмотренность и вкус развиваются в процессе.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-idx">02</span><span>«Программы 3Ds Max и Revit слишком сложные для меня»</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Софт мы вводим только на третьем месяце, когда у вас уже сформировано понимание пространства. К этому моменту программы становятся инструментом, а не барьером.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-idx">03</span><span>«Боюсь, что не найду клиентов после обучения»</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Вы выходите с готовым проектом в портфолио, навыком общения с клиентом на всех этапах и доступом к комьюнити и стажировкам внутри Landy Group.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-idx">04</span><span>«В чём разница между Offline · Premium и Hybrid · Base?»</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Offline · Premium включает личные выезды на объекты и очное наставничество студии. Hybrid · Base — тот же объём практики через живые онлайн-форматы и удалённую проверку работ.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="section final-cta" id="cta">
+  <svg class="arc-svg" width="900" height="500" viewBox="0 0 900 500" style="top:0;left:50%;transform:translateX(-50%);opacity:0.5;">
+    <path class="arc-path" id="arc3" d="M20,480 C300,480 620,300 880,20"/>
+  </svg>
+  <span class="float-swatch swatch swatch-wood cta-float cta-float-1"></span>
+  <span class="float-swatch swatch swatch-stone cta-float cta-float-2"></span>
+  <div class="wrap">
+    <div class="final-inner reveal">
+      <span class="eyebrow" style="justify-content:center;display:flex;">Начните здесь</span>
+      <h2>Профессию дизайнера нельзя изучить за один вечер. Но узнать, подходит ли она вам — можно за 20 минут.</h2>
+      <p>Оставьте заявку — мы свяжемся с вами и пригласим на бесплатную встречу, где вы получите подробную информацию о программе, форматах и стоимости.</p>
+
+      <form class="lead-form" id="leadForm">
+        <div class="form-success" id="formSuccess">
+          <svg viewBox="0 0 60 60" width="52" height="52">
+            <circle cx="30" cy="30" r="27" fill="none" stroke="var(--accent)" stroke-width="2" class="success-circle"/>
+            <path d="M18 31 L26 39 L42 21" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="success-check"/>
+          </svg>
+          <p>Заявка отправлена!</p>
+          <span>Мы свяжемся с вами в течение дня</span>
+        </div>
+        <div class="form-row">
+          <label for="fname">Имя</label>
+          <input type="text" id="fname" name="fname" placeholder="Как к вам обращаться" required>
+        </div>
+        <div class="form-row">
+          <label for="fphone">Телефон / Telegram</label>
+          <input type="text" id="fphone" name="fphone" placeholder="+998 __ ___ __ __ или @username" required>
+        </div>
+        <div class="form-row">
+          <label>Удобный формат</label>
+          <div class="format-pick">
+            <label><input type="radio" name="format" value="offline" checked><span>Offline</span></label>
+            <label><input type="radio" name="format" value="hybrid"><span>Hybrid</span></label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-shine">Записаться на встречу</button>
+      </form>
+      <p class="final-micro">Ответим в течение дня · без спама и навязчивых звонков</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="foot-left">
+        <strong style="color:var(--text);">Landy School</strong> · Landy Group — студия дизайна, образовательный центр, комплектация, декодирование.
+      </div>
+      <div class="foot-social">
+        <a href="https://www.instagram.com/landyschool/">Instagram</a>
+        <a href="https://t.me/LandyGGroup">Telegram</a>
+        <a href="https://www.youtube.com/@LandyGroup_com">YouTube</a>
+      </div>
+    </div>
+    <p class="foot-copy">© 2026 Landy School. Все права защищены.</p>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Закрыть">×</button>
+  <img src="" alt="" id="lightboxImg">
+  <span class="lightbox-caption" id="lightboxCaption"></span>
+</div>
+
+<script>
+  // Preloader
+  window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    setTimeout(() => {
+      preloader.classList.add('done');
+      setTimeout(() => preloader.remove(), 700);
+    }, 500);
+  });
+
+  // Scroll progress bar
+  const progressBar = document.getElementById('progressBar');
+
+  // Nav background on scroll
+  const header = document.getElementById('siteHeader');
+
+  // Cursor spotlight glow (desktop only)
+  // Cursor spotlight glow (desktop only) — двигаем через transform (GPU),
+  // а не перерисовываем полноэкранный градиент на каждом кадре
+  const spotlight = document.getElementById('spotlight');
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let spotTicking = false, lastX = 0, lastY = 0;
+    window.addEventListener('mousemove', (e) => {
+      lastX = e.clientX; lastY = e.clientY;
+      if (!spotTicking) {
+        requestAnimationFrame(() => {
+          spotlight.style.transform = `translate3d(${lastX}px, ${lastY}px, 0)`;
+          spotlight.classList.add('active');
+          spotTicking = false;
+        });
+        spotTicking = true;
+      }
+    }, { passive: true });
+  }
+
+  // Methodology progress line fills as the timeline scrolls into view
+  const timeline = document.getElementById('timeline');
+  const timelineFill = document.getElementById('timelineFill');
+
+  // Video testimonials — load the YouTube iframe only on click (lite-embed
+  // pattern), so the page doesn't pay the cost of multiple embeds up front
+  document.querySelectorAll('.testi-video-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = card.dataset.youtubeId;
+      const thumb = card.querySelector('.testi-video-thumb');
+      thumb.innerHTML = `<iframe
+        src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0"
+        title="Отзыв выпускника" frameborder="0"
+        allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+    }, { once: true });
+  });
+
+  // Асинхронное декодирование изображений — не блокирует скролл при рендере фото
+  document.querySelectorAll('img').forEach(img => {
+    img.decoding = 'async';
+  });
+
+  // Gallery lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if (item.querySelector('video')) return; // у видео-карточек свой лайтбокс не нужен
+      const img = item.querySelector('img');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightboxCaption.textContent = item.dataset.caption || '';
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  const closeLightbox = () => {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+
+  // Reveal-on-scroll with stagger per container
+  const revealEls = document.querySelectorAll('.reveal');
+  // assign incremental stagger delay within each direct-parent group
+  const seenParents = new Map();
+  revealEls.forEach(el => {
+    const p = el.parentElement;
+    const idx = seenParents.get(p) || 0;
+    el.style.transitionDelay = Math.min(idx * 90, 360) + 'ms';
+    seenParents.set(p, idx + 1);
+  });
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // Arc signature motif draw-on-scroll
+  const arcEls = document.querySelectorAll('.arc-path');
+  const arcObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        arcObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  arcEls.forEach(el => arcObserver.observe(el));
+
+  // Animated number counters
+  const statEls = document.querySelectorAll('.stat-num');
+  const animateCount = (el) => {
+    const target = parseFloat(el.dataset.count);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1400;
+    const start = performance.now();
+    const tick = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        statObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  statEls.forEach(el => statObserver.observe(el));
+
+
+// Hero photo parallax reference (applied in the unified scroll handler below)
+  const heroImg = document.getElementById('heroImg');
+  const heroMedia = document.getElementById('heroMedia');
+
+  // Hero video: only load on desktop-sized screens and when the user
+  // hasn't asked the browser to save data — keeps mobile traffic light.
+  const heroVideo = document.getElementById('heroVideo');
+  if (heroVideo) {
+    const saveData = navigator.connection && navigator.connection.saveData;
+    const isWideEnough = window.matchMedia('(min-width: 901px)').matches;
+    if (isWideEnough && !saveData) {
+      const source = heroVideo.querySelector('source');
+      source.src = source.dataset.src;
+      heroVideo.load();
+      heroVideo.addEventListener('canplaythrough', () => {
+        heroVideo.classList.add('playing');
+        heroVideo.play().catch(() => {});
+      }, { once: true });
+
+      // Подстраховка на случай, если атрибут loop не сработает в браузере
+      heroVideo.addEventListener('ended', () => {
+        heroVideo.currentTime = 0;
+        heroVideo.play().catch(() => {});
+      });
+
+      // Pause the video while the hero is off-screen to save CPU/battery
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) heroVideo.play().catch(() => {});
+          else heroVideo.pause();
+        });
+      }, { threshold: 0.1 });
+      heroObserver.observe(heroVideo);
+    }
+  }
+
+  // Видео в блоке «Профессия»: грузим только на десктопе и без экономии
+  // трафика, включаем при появлении в зоне видимости, ставим на паузу вне её.
+  document.querySelectorAll('.profession-video').forEach(video => {
+    const saveData = navigator.connection && navigator.connection.saveData;
+    const isWideEnough = window.matchMedia('(min-width: 901px)').matches;
+    if (!isWideEnough || saveData) return;
+
+    const source = video.querySelector('source');
+    source.src = source.dataset.src;
+    video.load();
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.classList.add('playing');
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.25 });
+    io.observe(video);
+  });
+  // Видео-превью в карточках портфолио — та же лёгкая логика: только десктоп,
+  // без экономии трафика, воспроизведение при появлении в зоне видимости
+  document.querySelectorAll('.gallery-video').forEach(video => {
+    const saveData = navigator.connection && navigator.connection.saveData;
+    const isWideEnough = window.matchMedia('(min-width: 901px)').matches;
+    if (!isWideEnough || saveData) return;
+
+    const source = video.querySelector('source');
+    source.src = source.dataset.src;
+    video.load();
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.classList.add('playing');
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.25 });
+    io.observe(video);
+  });
+  // 3D tilt on pricing cards + gallery items — только на устройствах с настоящей мышью.
+  // На тач-экранах пропускаем полностью: это убирает лишние перерисовки при скролле.
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.tilt-card, .gallery-item').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        const strength = card.classList.contains('gallery-item') ? 4 : 6;
+        card.style.transform = `perspective(900px) rotateY(${px * strength}deg) rotateX(${-py * strength}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(900px) rotateY(0) rotateX(0) translateY(0)';
+      });
+    });
+  }
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Shared lead submission → Google Apps Script → Google Sheets
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOMyCZAZD522SU1C0Ru19f2DAdRa_EFn78YkiFJ8kUB-JDhqaNykBwId73Ztb5WXfE/exec';
+
+  function sendLead(formEl, successEl, payload) {
+    const btn = formEl.querySelector('button[type="submit"]');
+    const original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Отправляем...';
+
+    // mode:'no-cors' — Apps Script не отдаёт CORS-заголовки, поэтому ответ
+    // прочитать нельзя, но запрос доходит и данные записываются. Читать тело
+    // ответа не пытаемся: именно это раньше вызывало ложную ошибку.
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    })
+      .then(() => {
+        formEl.classList.add('submitted');
+        successEl.classList.add('show');
+        formEl.reset();
+      })
+      .catch(() => {
+        btn.textContent = 'Ошибка. Попробуйте ещё раз';
+      })
+      .finally(() => {
+        setTimeout(() => { btn.disabled = false; btn.textContent = original; }, 2600);
+      });
+  }
+
+  // Main lead form (final CTA)
+  const leadForm = document.getElementById('leadForm');
+  const formSuccess = document.getElementById('formSuccess');
+  leadForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    sendLead(leadForm, formSuccess, {
+      fname: document.getElementById('fname').value,
+      fphone: document.getElementById('fphone').value,
+      format: leadForm.querySelector('input[name="format"]:checked').value,
+      source: 'Финальная форма'
+    });
+  });
+
+  // Callback form
+  const callbackForm = document.getElementById('callbackForm');
+  const callbackSuccess = document.getElementById('callbackSuccess');
+  callbackForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    sendLead(callbackForm, callbackSuccess, {
+      fname: document.getElementById('cbName').value,
+      fphone: document.getElementById('cbPhone').value,
+      format: '—',
+      source: 'Обратный звонок'
+    });
+  });
+
+  // Exit-intent form
+  const exitForm = document.getElementById('exitForm');
+  const exitSuccess = document.getElementById('exitSuccess');
+  exitForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    sendLead(exitForm, exitSuccess, {
+      fname: document.getElementById('exName').value,
+      fphone: document.getElementById('exPhone').value,
+      format: '—',
+      source: 'Exit-intent скидка'
+    });
+  });
+
+  // Announcement bar close
+  const announce = document.getElementById('announce');
+  document.getElementById('announceClose').addEventListener('click', () => {
+    announce.classList.add('hidden');
+  });
+
+  // Callback modal open/close
+  const callbackModal = document.getElementById('callbackModal');
+  document.getElementById('callbackFab').addEventListener('click', () => callbackModal.classList.add('open'));
+  document.getElementById('callbackClose').addEventListener('click', () => callbackModal.classList.remove('open'));
+  callbackModal.addEventListener('click', (e) => { if (e.target === callbackModal) callbackModal.classList.remove('open'); });
+
+  // Exit-intent modal (triggers once per page load, in-memory only)
+  const exitModal = document.getElementById('exitModal');
+  document.getElementById('exitClose').addEventListener('click', () => exitModal.classList.remove('open'));
+  exitModal.addEventListener('click', (e) => { if (e.target === exitModal) exitModal.classList.remove('open'); });
+  let exitShown = false;
+  document.addEventListener('mouseout', (e) => {
+    if (!exitShown && e.clientY <= 0 && !callbackModal.classList.contains('open')) {
+      exitShown = true;
+      exitModal.classList.add('open');
+    }
+  });
+
+  // Income calculator
+  const calcRange = document.getElementById('calcAreaRange');
+  const calcInput = document.getElementById('calcArea');
+  const calcNovice = document.getElementById('calcNovice');
+  const calcMid = document.getElementById('calcMid');
+  const calcPro = document.getElementById('calcPro');
+  const fmt = (n) => Math.round(n).toLocaleString('ru-RU');
+
+  function updateCalc(area) {
+    const a = Math.max(parseFloat(area) || 0, 0);
+    calcNovice.textContent = `$${fmt(a * 10)}`;
+    calcMid.textContent = `$${fmt(a * 15)}–$${fmt(a * 20)}`;
+    calcPro.textContent = `от $${fmt(a * 35)}`;
+  }
+  calcRange.addEventListener('input', () => { calcInput.value = calcRange.value; updateCalc(calcRange.value); });
+  calcInput.addEventListener('input', () => {
+    let v = Math.min(Math.max(parseInt(calcInput.value) || 0, 0), 1000);
+    if (v >= 30 && v <= 300) calcRange.value = v;
+    updateCalc(v);
+  });
+  updateCalc(calcInput.value);
+
+  // Back-to-top button with scroll-progress ring
+  const toTop = document.getElementById('toTop');
+  const ringFill = document.getElementById('ringFill');
+  const ringLength = 2 * Math.PI * 19;
+  ringFill.style.strokeDasharray = ringLength;
+  ringFill.style.strokeDashoffset = ringLength;
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // ===== Unified scroll handler =====
+  // All scroll-linked reads happen first, then all writes — avoids layout
+  // thrashing from having several independent scroll listeners interleave
+  // reads and writes within the same frame. Runs at most once per frame.
+  let scrollTicking = false;
+  function onScroll() {
+    const docEl = document.documentElement;
+    const scrollY = window.scrollY;
+    const scrollableHeight = docEl.scrollHeight - docEl.clientHeight;
+
+    // --- reads ---
+    const scrolledPct = scrollableHeight > 0 ? (docEl.scrollTop / scrollableHeight) * 100 : 0;
+    let timelineProgress = null;
+    if (timeline && timelineFill) {
+      const r = timeline.getBoundingClientRect();
+      const vh = window.innerHeight;
+      timelineProgress = Math.min(Math.max((vh * 0.8 - r.top) / r.height, 0), 1);
+    }
+
+    // --- writes ---
+    progressBar.style.width = scrolledPct + '%';
+    header.classList.toggle('scrolled', scrollY > 40);
+    if (timelineFill && timelineProgress !== null) {
+      timelineFill.style.width = (timelineProgress * 100) + '%';
+    }
+    if (heroMedia && scrollY < window.innerHeight) {
+      heroMedia.style.transform = `scale(1.08) translateY(${scrollY * 0.08}px)`;
+    }
+    ringFill.style.strokeDashoffset = ringLength * (1 - scrolledPct / 100);
+    toTop.classList.toggle('visible', docEl.scrollTop > 600);
+
+    scrollTicking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      requestAnimationFrame(onScroll);
+      scrollTicking = true;
+    }
+  }, { passive: true });
+  onScroll(); // run once on load so initial state is correct
+
+  // Ставим декоративные анимации на паузу, пока их секция не видна
+  const animatedSections = document.querySelectorAll('.ticker, #eco, .final-cta, .hero');
+  const animObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      entry.target.classList.toggle('in-view', entry.isIntersecting);
+    });
+  }, { threshold: 0.01 });
+  animatedSections.forEach(el => animObserver.observe(el));
+
+</script>
+
+
+</body>
+</html>
