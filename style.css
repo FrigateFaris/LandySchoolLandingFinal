@@ -1335,3 +1335,16 @@ footer{border-top:1px solid var(--shadow);padding:44px 0;}
 
 /* Страховка от любого горизонтального скролла */
 html, body{overflow-x:hidden;max-width:100%;}
+
+/* ===== Mid-page CTA banner ===== */
+.mid-cta{background:var(--object);}
+.mid-cta-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;
+}
+.mid-cta-inner h3{font-size:20px;font-weight:400;margin-bottom:6px;}
+.mid-cta-inner p{color:var(--text-dim);font-size:14px;}
+@media(max-width:640px){
+  .mid-cta-inner{flex-direction:column;text-align:center;}
+  .mid-cta-inner .btn{width:100%;justify-content:center;}
+}
